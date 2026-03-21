@@ -1,0 +1,46 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# .gitignore 설정 추가
+# 환경 변수 확장
+.env.*
+!.env.example
+# 캐시 파일
+.cache
+*.cache
+# 빌드 및 임시 파일
+build
+out
+coverage
+# OS 관련 파일 추가
+Thumbs.db
+# 로그 확장
+*.log.*
+# 데이터 로깅 파일
+logs/
+temp-data/
+# mobile (future)
+android/
+ios/
