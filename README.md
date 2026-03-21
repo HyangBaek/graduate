@@ -1,5 +1,8 @@
 # Eye Tracking PDF Viewer
 
+## 프로젝트
+EyeScore
+
 ## 프로젝트 소개
 시선 추적을 기반으로 PDF 문서를 읽을 때 자동으로 페이지를 넘겨주는 웹 애플리케이션
 
@@ -28,17 +31,29 @@
 
 ## 프로젝트 구조
 src/
+
  ├ modules/
+ 
  │   ├ eyeTracking/
+ 
  │   ├ pdfViewer/
+ 
  │   ├ pagePrediction/
+ 
  │   └ dataLogger/
+ 
  │
+ 
  ├ controllers/
+ 
  │   └ mainController/
+ 
  │
+ 
  ├ services/
+ 
  └ utils/
+ 
 
 ## 실행 방법
 npm install
