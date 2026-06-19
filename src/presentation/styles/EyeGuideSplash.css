@@ -1,0 +1,105 @@
+/* src/presentation/styles/EyeGuideSplash.css */
+/* 소문자 e 시선 유도 스플래시 — 라이트/다크 테마 대응 */
+
+/* ── 컨테이너 ─────────────────────────────────────────────────────── */
+.eye-guide-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+
+  /* 라이트 모드: 밝은 오션 배경 */
+  background: radial-gradient(ellipse 90% 70% at 40% 40%, #dff3f8 0%, #f0fafd 100%);
+
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+body.dark-mode .eye-guide-splash {
+  background: radial-gradient(ellipse 90% 70% at 35% 40%, #0b2340 0%, #040e1c 100%);
+}
+
+.eye-guide-splash--out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── 전체화면 SVG ─────────────────────────────────────────────────── */
+.eye-guide-splash__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── 드로잉 경로 / 코어 점 글로우 (GPU drop-shadow) ───────────────────── */
+.eye-guide-splash__draw-path {
+  filter: drop-shadow(0 0 3.5px rgba(0, 200, 220, 0.75));
+}
+
+.eye-guide-splash__core-dot {
+  filter:
+    drop-shadow(0 0 8px rgba(0, 200, 220, 0.85))
+    drop-shadow(0 0 3px rgba(120, 240, 255, 1));
+}
+
+/* ── 중앙 EyeScore 로고 ────────────────────────────────────────────── */
+.eye-guide-splash__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+  user-select: none;
+
+  /* 글자별 순차 등장으로 container 자체 animation 불필요 */
+  color: #0099b3;
+}
+
+/* ── 글자별 등장 애니메이션 ─────────────────────────────────────────── */
+/* 45ms 간격으로 순차 등장 (--logo-char-delay CSS 변수로 주입) */
+.eye-guide-splash__logo-char {
+  display: inline-block;
+  opacity: 0;
+  animation: char-appear 0.28s ease forwards;
+  animation-delay: var(--logo-char-delay, 0ms);
+
+  /* 라이트 모드: 흰색 후광으로 가독성 확보 */
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.95),
+    0 0 22px rgba(255, 255, 255, 0.7);
+}
+
+/* Score 부분 — 색상만 동일, 흰색 그림자 공통 적용 */
+.eye-guide-splash__logo-char--accent {
+  /* 라이트 모드: 오션 계열 */
+  color: #0099b3;
+}
+
+/* 다크 모드: 전체 흰색 + 오션 글로우 */
+body.dark-mode .eye-guide-splash__logo-char {
+  color: #ffffff;
+  text-shadow:
+    0 0 18px rgba(0, 200, 220, 0.50),
+    0 0 40px rgba(0, 180, 220, 0.25);
+}
+
+body.dark-mode .eye-guide-splash__logo-char--accent {
+  color: #ffffff;
+}
+
+@keyframes char-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,137 @@
+/* src/presentation/styles/components/AppInfoModal.css */
+/* AppInfoModal.tsx 전용 스타일 */
+
+.app-info-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 399;
+}
+
+.app-info-modal {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.3);
+  z-index: 400;
+  animation: appInfoSlideUp 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes appInfoSlideUp {
+  from {
+    transform: translate(-50%, 100%);
+  }
+  to {
+    transform: translate(-50%, 0);
+  }
+}
+
+.app-info-modal__header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 20px 20px 12px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.12);
+}
+
+.app-info-modal__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.app-info-modal__version {
+  font-size: 12px;
+  color: var(--color-text-secondary, #888);
+  flex: 1;
+}
+
+.app-info-modal__close {
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+}
+
+.app-info-modal__close:hover {
+  opacity: 1;
+}
+
+.app-info-modal__body {
+  padding: 16px 20px 28px;
+}
+
+.app-info-modal__tagline {
+  font-size: 13px;
+  color: var(--color-text-secondary, #888);
+  margin: 0 0 18px;
+}
+
+.app-info-section {
+  margin-bottom: 18px;
+}
+
+.app-info-section:last-child {
+  margin-bottom: 0;
+}
+
+.app-info-section__title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary, #888);
+  margin: 0 0 8px;
+}
+
+.app-info-feature-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.app-info-feature-list li {
+  margin-bottom: 4px;
+}
+
+.app-info-section--privacy p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  padding: 10px 12px;
+  background: rgba(89, 241, 255, 0.08);
+  border: 1px solid rgba(89, 241, 255, 0.18);
+  border-radius: 10px;
+}
+
+.app-info-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.app-info-tech-pill {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(128, 128, 128, 0.12);
+}
+
+.app-info-section p {
+  font-size: 13.5px;
+  margin: 0;
+}

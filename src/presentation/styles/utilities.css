@@ -1,0 +1,262 @@
+/* =========================
+   1. CSS Reset
+========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   2. Root Variables
+========================= */
+
+:root {
+  /* Light Mode (Default) - Ocean Blue Accent Theme */
+  --color-bg: #ffffff;
+  --color-surface: #f8fafc;
+  --color-text: #0f172a;
+  --color-muted: #64748b;
+  --color-primary: #0284c7; /* Ocean Blue Accent */
+  --color-ocean: #00a8cc; /* Vibrant Ocean */
+  --color-accent: #0369a1;
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+  --border-radius: 12px;
+  --layout-sidebar-width: 320px;
+  --transition-fast: 120ms ease;
+  --transition-normal: 220ms ease;
+
+  /* Header styles in light mode */
+  --header-bg: rgba(248, 250, 252, 0.85);
+  --header-border: rgba(128, 128, 128, 0.15);
+  --header-text: #0f172a;
+  --header-btn-hover: rgba(0, 0, 0, 0.05);
+  --header-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --header-doc-color: #475569;
+  --header-logo-badge-color: #64748b;
+  --header-divider-color: rgba(128, 128, 128, 0.2);
+
+  /* PDF 뷰어 상하단바 — 본문이 더 잘 보이도록 header-bg보다 낮은 투명도 */
+  --viewer-bar-bg: rgba(248, 250, 252, 0.45);
+}
+
+.dark-mode {
+  /* Dark Mode - Aqua Accent Theme */
+  --color-bg: #0c0f17;
+  --color-surface: #121824;
+  --color-text: #f1f5f9;
+  --color-muted: #64748b;
+  --color-primary: #00f0ff; /* Aqua Accent */
+  --color-ocean: #00f0ff; /* Bright Aqua/Ocean */
+  --color-accent: #00d8ff;
+  --color-danger: #ff3b6b;
+  --color-success: #00e676;
+
+  /* Header styles in dark mode */
+  --header-bg: rgba(18, 24, 36, 0.85);
+  --header-border: rgba(255, 255, 255, 0.08);
+  --header-text: #f1f5f9;
+  --header-btn-hover: rgba(255, 255, 255, 0.08);
+  --header-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --header-doc-color: #cbd5e1;
+  --header-logo-badge-color: #94a3b8;
+  --header-divider-color: rgba(255, 255, 255, 0.15);
+
+  /* PDF 뷰어 상하단바 — 본문이 더 잘 보이도록 header-bg보다 낮은 투명도 */
+  --viewer-bar-bg: rgba(18, 24, 36, 0.45);
+}
+
+/* =========================
+   3. Base Body
+========================= */
+
+body {
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+
+  background: var(--color-bg);
+  color: var(--color-text);
+
+  overflow: hidden;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================
+   4. Buttons
+========================= */
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  font: inherit;
+
+  transition: backgroundvar(--transition-fast);
+}
+
+/* =========================
+   5. Inputs
+========================= */
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* =========================
+   6. Links
+========================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================
+   7. Images & Canvas
+========================= */
+
+img,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================
+   8. PDF Viewer Base
+========================= */
+
+.pdf-viewer-root {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #1e293b;
+}
+
+.pdf-canvas-wrapper {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: auto;
+}
+
+/* =========================
+   9. Gaze Overlay
+========================= */
+
+.gaze-overlay {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+}
+
+.gaze-cursor {
+  position: absolute;
+
+  width: 16px;
+  height: 16px;
+
+  border-radius: 999px;
+
+  background: #ef4444;
+
+  transform: translate(-50%, -50%);
+}
+
+/* =========================
+   10. Debug Panel
+========================= */
+
+.debug-panel {
+  position: fixed;
+
+  top: 16px;
+  right: 16px;
+
+  min-width: 220px;
+
+  padding: 12px;
+
+  border-radius: var(--border-radius);
+
+  background: rgba(15, 23, 42, 0.92);
+
+  color: white;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  backdrop-filter: blur(8px);
+}
+
+/* =========================
+   11. Utility Classes
+========================= */
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-size {
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+/* =========================
+   12. Scrollbar
+========================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 999px;
+}
+
+/* =========================
+   13. Selection
+========================= */
+
+::selection {
+  background: #6366f1;
+  color: white;
+}

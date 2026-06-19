@@ -1,0 +1,112 @@
+/* ============================================================
+   hotzones.css
+   시선 기반 페이지 전환 핫존 영역 및 진행 표시 스타일
+   ============================================================ */
+
+/* ── 핫존 공통 ───────────────────────────────────────────── */
+.hotzone {
+  position: fixed;
+  z-index: 9998;
+  pointer-events: none;
+  transition:
+    background 0.15s ease,
+    opacity 0.3s ease;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hotzone.hidden {
+  opacity: 0;
+}
+
+/* ── 다음 페이지 (하단 우측) ─────────────────────────────── */
+.hotzone-next {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 8px;
+  border-top: 1px dashed rgba(255, 0, 127, 0.2);
+  border-left: 1px dashed rgba(255, 0, 127, 0.2);
+  border-right: 1px dashed rgba(255, 0, 127, 0.2);
+  border-bottom: 1px dashed rgba(255, 0, 127, 0.2);
+}
+
+.hotzone-next.no-bounds {
+  border-right: none;
+  border-bottom: none;
+}
+
+/* ── 이전 페이지 (상단) ──────────────────────────────────── */
+.hotzone-prev {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 8px;
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.12);
+  border-left: 1px dashed rgba(0, 240, 255, 0.12);
+  border-right: 1px dashed rgba(0, 240, 255, 0.12);
+  border-top: 1px dashed rgba(0, 240, 255, 0.12);
+}
+
+.hotzone-prev.no-bounds {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+/* ── 진행 바 ─────────────────────────────────────────────── */
+.hotzone-progress-bar {
+  position: absolute;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  transition: width 0.08s linear;
+}
+
+.hotzone-progress-bar.next-bar {
+  top: 0;
+  background: linear-gradient(90deg, #ff007f, #7f00ff);
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.8);
+}
+
+.hotzone-progress-bar.prev-bar {
+  bottom: 0;
+  background: linear-gradient(90deg, #00f0ff, #0072ff);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.8);
+}
+
+/* ── 레이블 ──────────────────────────────────────────────── */
+.hotzone-label {
+  font-size: 9px;
+  font-family: monospace;
+  font-weight: bold;
+  user-select: none;
+}
+
+.hotzone-label.next-label {
+  color: rgba(255, 0, 127, 0.45);
+}
+
+.hotzone-label.prev-label {
+  color: rgba(0, 240, 255, 0.35);
+}
+
+/* ── 마지막/첫 페이지 (더 이상 넘어갈 곳이 없을 때) ───────────────── */
+.hotzone-next.hotzone-end {
+  border-top: 1px dashed rgba(160, 160, 170, 0.3);
+  border-left: 1px dashed rgba(160, 160, 170, 0.3);
+  border-right: 1px dashed rgba(160, 160, 170, 0.3);
+  border-bottom: 1px dashed rgba(160, 160, 170, 0.3);
+}
+
+.hotzone-prev.hotzone-end {
+  border-bottom: 1px dashed rgba(160, 160, 170, 0.22);
+  border-left: 1px dashed rgba(160, 160, 170, 0.22);
+  border-right: 1px dashed rgba(160, 160, 170, 0.22);
+  border-top: 1px dashed rgba(160, 160, 170, 0.22);
+}
+
+.hotzone-end .hotzone-label {
+  color: rgba(160, 160, 170, 0.55);
+}

@@ -1,0 +1,80 @@
+/* src/presentation/styles/components/NavigationROIHint.css
+   NavigationROIHint.tsx 1:1 대응 스타일 */
+
+.roi-hint {
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  transition: opacity 400ms ease-out;
+}
+
+.roi-hint.roi-hint--fading {
+  opacity: 0;
+}
+
+.roi-hint__ring-wrap {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.roi-hint__ring-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2.5px solid rgba(0, 200, 220, 0.6);
+  animation: roi-pulse 1s ease-out infinite;
+}
+
+.roi-hint__ring-inner {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: rgba(0, 200, 220, 0.25);
+  border: 2px solid rgba(0, 200, 220, 0.85);
+  box-shadow: 0 0 16px rgba(0, 200, 220, 0.55), 0 0 6px rgba(120, 240, 255, 0.7);
+}
+
+.roi-hint__dot {
+  position: absolute;
+  inset: 22px;
+  border-radius: 50%;
+  background: rgba(0, 220, 240, 0.9);
+}
+
+.roi-hint__label {
+  color: rgba(0, 220, 240, 0.9);
+  font-size: 11px;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 8px rgba(0, 200, 220, 0.7);
+  white-space: nowrap;
+}
+
+.roi-hint__arrow {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid rgba(0, 200, 220, 0.7);
+  animation: roi-bounce 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes roi-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  70% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes roi-bounce {
+  from { transform: translateY(0); }
+  to   { transform: translateY(4px); }
+}

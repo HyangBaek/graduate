@@ -1,0 +1,76 @@
+/* src/presentation/styles/PdfViewerPage.css */
+
+.pdf-viewer-page-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-bg);
+  transition: background var(--transition-normal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pdf-viewer-page-canvas {
+  display: block;
+}
+
+/* ── LCP 썸네일 오버레이 ─────────────────────────────────────────────────────
+ * PDF 로딩 전 thumbnail <img> 를 canvas 위에 absolute로 올려
+ * 브라우저 LCP 후보로 등록 (canvas는 LCP 후보 아님).
+ * Phase 1 렌더 완료 시 display:none → 이미 LCP 시간은 기록된 상태.
+ * ──────────────────────────────────────────────────────────────────────────── */
+.pdf-lcp-thumbnail {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pdf-lcp-thumbnail img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.pdf-load-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text-secondary, #888);
+  text-align: center;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.pdf-load-error svg {
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.pdf-load-error__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text, #fff);
+  margin: 0;
+}
+
+.pdf-load-error__sub {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 260px;
+}

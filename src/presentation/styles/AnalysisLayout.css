@@ -1,0 +1,647 @@
+/* ============================================================
+   AnalysisLayout.css
+   캘리브레이션/Gaze Cursor 분석 페이지 공용 스타일
+   (CalibrationAnalysisLayout.tsx, CursorAnalysisLayout.tsx)
+   ============================================================ */
+
+.analysis-layout {
+  /* body가 overflow: hidden이라 min-height: 100vh로는 내용이 넘쳐도 부모가
+     잘라버려 스크롤이 동작하지 않았다. height를 뷰포트에 고정하고 이 박스
+     자신이 스크롤 컨테이너가 되게 한다. */
+  height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 24px 28px 60px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.analysis-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.analysis-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.analysis-header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.analysis-section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.analysis-section-header-row h3 {
+  margin: 0;
+}
+
+.analysis-section-header-row .analysis-filter-row {
+  margin-bottom: 0;
+}
+
+.analysis-back-btn {
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.analysis-back-btn:hover {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: rgba(2, 132, 199, 0.4);
+}
+
+.analysis-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.analysis-upload-btn {
+  border: 1px solid rgba(2, 132, 199, 0.45);
+  background: rgba(2, 132, 199, 0.12);
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.analysis-upload-btn:hover {
+  background: rgba(2, 132, 199, 0.2);
+}
+
+.analysis-upload-status {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--color-muted);
+}
+
+.analysis-upload-reset {
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.analysis-upload-reset:hover {
+  border-color: rgba(2, 132, 199, 0.4);
+}
+
+.analysis-upload-error {
+  font-size: 11px;
+  color: var(--color-danger);
+}
+
+.analysis-summary-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.analysis-summary-card {
+  flex: 1;
+  min-width: 140px;
+  background: var(--color-surface);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-key {
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.summary-val {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.analysis-section {
+  margin-bottom: 28px;
+}
+
+.analysis-section h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 10px;
+}
+
+.analysis-hint {
+  font-size: 11px;
+  color: var(--color-muted);
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.analysis-empty {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.analysis-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 10px;
+}
+
+.analysis-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  font-family: monospace;
+  background: var(--color-surface);
+}
+
+.analysis-table th,
+.analysis-table td {
+  padding: 8px 10px;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.analysis-table th:first-child,
+.analysis-table td:first-child {
+  text-align: left;
+}
+
+.analysis-table thead th {
+  color: var(--color-muted);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  background: var(--color-bg);
+}
+
+.analysis-table tbody tr:hover {
+  background: rgba(2, 132, 199, 0.06);
+}
+
+.analysis-table tr.row-warn {
+  background: rgba(255, 68, 68, 0.06);
+}
+
+.analysis-table tr.row-selected {
+  background: rgba(2, 132, 199, 0.12);
+}
+
+.analysis-table td.cell-danger {
+  color: var(--color-danger);
+  font-weight: 700;
+}
+
+.analysis-table td.cell-strong {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.analysis-session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.analysis-session-item {
+  display: grid;
+  grid-template-columns: 100px 140px 64px 64px 84px 1fr;
+  align-items: center;
+  gap: 14px;
+  background: var(--color-surface);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.analysis-session-item:hover {
+  border-color: rgba(2, 132, 199, 0.4);
+}
+
+.analysis-session-item.active {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: rgba(2, 132, 199, 0.45);
+}
+
+.session-id {
+  font-weight: 700;
+}
+
+.session-time {
+  color: var(--color-muted);
+}
+
+.session-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+  justify-self: start;
+}
+
+.session-badge.ok {
+  background: rgba(0, 204, 102, 0.18);
+  color: var(--color-success);
+}
+
+.session-badge.err {
+  background: rgba(255, 68, 68, 0.15);
+  color: var(--color-danger);
+}
+
+.session-meta {
+  color: var(--color-muted);
+}
+
+.analysis-svg-wrap {
+  background: var(--color-surface);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.analysis-svg {
+  display: block;
+  background: var(--color-bg);
+  border-radius: 6px;
+}
+
+.analysis-legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ============================================================
+   추가 기능: 이상치 배너 / 색상 단계 / 바 차트 / 정렬 / 필터 / 비교
+   ============================================================ */
+
+.analysis-outlier-banner {
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.35);
+  color: var(--color-danger);
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.session-badge.warn {
+  background: rgba(255, 153, 0, 0.18);
+  color: #ff9900;
+}
+
+/* 값 크기별 경고 강도 (1=약, 2=중, 3=강) */
+.cell-sev-1 {
+  color: #d18f00;
+  font-weight: 600;
+}
+
+.cell-sev-2 {
+  color: #ff9900;
+  font-weight: 700;
+}
+
+.cell-sev-3 {
+  color: var(--color-danger);
+  font-weight: 800;
+}
+
+.th-sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.th-sortable:hover {
+  color: var(--color-primary);
+}
+
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--color-surface);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.bar-chart-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 90px;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-family: monospace;
+}
+
+.bar-chart-label {
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.bar-chart-track {
+  background: rgba(128, 128, 128, 0.12);
+  border-radius: 4px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.bar-chart-fill {
+  height: 100%;
+  width: var(--bar-width);
+  background: rgba(2, 132, 199, 0.32);
+  border-radius: 4px;
+  min-width: 2px;
+  transition: width 0.25s ease;
+}
+
+.bar-chart-fill.cell-sev-1 {
+  background: rgba(209, 143, 0, 0.32);
+}
+
+.bar-chart-fill.cell-sev-2 {
+  background: rgba(255, 153, 0, 0.32);
+}
+
+.bar-chart-fill.cell-sev-3 {
+  background: rgba(255, 68, 68, 0.32);
+}
+
+/* stabilityScore 분포 히스토그램 전용 — 투명도 있는 톤 (다른 bar-chart에는 영향 없음) */
+.bar-chart-fill.histogram-tone {
+  background: rgba(2, 132, 199, 0.32);
+}
+
+.bar-chart-fill.histogram-tone-warn {
+  background: rgba(255, 68, 68, 0.32);
+}
+
+.bar-chart-value {
+  color: var(--color-muted);
+  text-align: right;
+}
+
+.analysis-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.filter-select {
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.compare-toggle-btn {
+  border: 1px solid rgba(2, 132, 199, 0.45);
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.compare-toggle-btn.active {
+  background: rgba(2, 132, 199, 0.18);
+}
+
+.analysis-session-item.calibration-session-row {
+  grid-template-columns: 100px 140px 64px 64px 64px 84px 1fr;
+}
+
+.analysis-session-item.compare-selected {
+  background: rgba(255, 153, 0, 0.12);
+  border-color: rgba(255, 153, 0, 0.45);
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.compare-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 진행 중(아직 종료되지 않은) 세션 강조 — 가만히 있는 일반 텍스트와 구분되도록
+   살짝 깜빡이는 애니메이션을 준다. */
+.session-live-text {
+  color: var(--color-danger);
+  font-weight: 700;
+  animation: session-live-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes session-live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ============================================================
+   막대 + 추이선 결합 차트 카드 ("알약" 라벨 + 막대 + 흰 추이선 스타일)
+   ============================================================ */
+
+.chart-card {
+  background: var(--color-bg);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 14px;
+  padding: 18px 20px 14px;
+}
+
+.chart-pill-row {
+  margin-bottom: 14px;
+}
+
+.chart-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  padding: 6px 16px;
+  border-radius: 999px;
+}
+
+.chart-pill.tone-primary {
+  background: rgba(2, 132, 199, 0.18);
+  color: var(--color-primary);
+}
+
+.chart-pill.tone-warn {
+  background: rgba(255, 68, 68, 0.16);
+  color: var(--color-danger);
+}
+
+.chart-axis-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--color-muted);
+  margin-bottom: 4px;
+}
+
+.chart-grid-line {
+  stroke: rgba(128, 128, 128, 0.16);
+  stroke-width: 1;
+}
+
+.chart-bar {
+  fill: var(--color-primary);
+  opacity: 0.4;
+  rx: 2;
+}
+
+.chart-bar.tone-warn {
+  fill: var(--color-danger);
+  opacity: 0.42;
+}
+
+.chart-trend-line {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.95;
+}
+
+.chart-trend-dot {
+  fill: var(--color-danger);
+}
+
+/* ============================================================
+   유틸리티 — 마진/폰트 크기/가시성
+   ============================================================ */
+
+.analysis-m-0 {
+  margin: 0;
+}
+
+.analysis-mt-0 {
+  margin-top: 0;
+}
+
+.analysis-mt-8 {
+  margin-top: 8px;
+}
+
+.analysis-mt-12 {
+  margin-top: 12px;
+}
+
+.analysis-mt-16 {
+  margin-top: 16px;
+}
+
+.analysis-fs-16 {
+  font-size: 16px;
+}
+
+.analysis-invisible {
+  visibility: hidden;
+}
+
+.analysis-mt-10 {
+  margin-top: 10px;
+}
+
+.analysis-mb-12 {
+  margin-bottom: 12px;
+}
+
+.summary-val--danger {
+  color: var(--color-danger);
+}
+
+.row-clickable {
+  cursor: pointer;
+}
+
+.legend-dot--raw {
+  background: #ff9b9b;
+}
+
+.legend-dot--cursor {
+  background: var(--color-primary);
+}

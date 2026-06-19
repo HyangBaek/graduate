@@ -1,0 +1,377 @@
+/* DebugDrawer.css */
+/* ============================================================
+   DebugDrawer.css
+   오른쪽 슬라이드 인 사이드바 드로어 및 백드롭 스타일
+   ============================================================ */
+
+/* ── Drawer Container ────────────────────────────────────── */
+.debug-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100vh;
+  background: var(--color-surface);
+  backdrop-filter: blur(28px);
+  border-left: 1px solid rgba(128, 128, 128, 0.15);
+  box-shadow: -12px 0 48px rgba(0, 0, 0, 0.15);
+  z-index: 10005;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.debug-drawer.open {
+  right: 0;
+}
+
+/* ── Backdrop ────────────────────────────────────────────── */
+.debug-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10004;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(2px);
+  animation: backdropFadeIn 0.2s ease-out forwards;
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Drawer Header ───────────────────────────────────────── */
+.debug-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+  flex-shrink: 0;
+  background: var(--color-bg);
+}
+
+.debug-drawer-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.5px;
+}
+
+.debug-drawer-close {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.debug-drawer-close:hover {
+  color: var(--color-text);
+}
+
+.debug-drawer-close-icon {
+  display: block;
+}
+
+/* ── Drawer Body ─────────────────────────────────────────── */
+.debug-drawer-body {
+  flex: 1;
+  padding: 20px 24px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128, 128, 128, 0.2) transparent;
+}
+
+/* ── Drawer Groups ───────────────────────────────────────── */
+.drawer-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drawer-group h4 {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-muted);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+/* ── 접고 펼 수 있는 대분류 헤더 (SYSTEM CONTROLS / VIEW OPTIONS / DATA) ── */
+.drawer-group h4.collapsible {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+  transition: color 0.15s ease;
+}
+
+.drawer-group h4.collapsible:hover {
+  color: var(--color-primary);
+}
+
+.drawer-section-chevron {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.drawer-section-chevron.collapsed {
+  transform: rotate(-90deg);
+}
+
+/* ── 대분류 섹션 본문 접기/펴기 (MONITOR의 .drawer-monitor-inline.collapsed와
+   동일한 메커니즘을 일반화 — 단, 본문 높이가 더 크므로 max-height를 넉넉히 잡음) ── */
+.drawer-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  max-height: 2000px;
+  opacity: 1;
+  margin-top: 8px;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.2s ease,
+    margin-top 0.3s ease;
+}
+
+.drawer-section-body.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.drawer-group-divider {
+  height: 1px;
+  background: rgba(128, 128, 128, 0.15);
+  margin: 4px 0;
+}
+
+/* ── Status Badge ────────────────────────────────────────── */
+.drawer-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-bg);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.drawer-status-badge .status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--status-color);
+}
+
+.drawer-status-badge .status-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ── Calibration Button ──────────────────────────────────── */
+.drawer-btn {
+  border: none;
+  color: var(--color-muted); /* Match SYSTEM STATUS label color */
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.drawer-btn.primary {
+  background: rgba(2, 132, 199, 0.2); /* Soft Ocean background */
+  border: 1px solid rgba(2, 132, 199, 0.45);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.1);
+  color: var(--color-muted); /* Match SYSTEM STATUS label color */
+}
+
+.drawer-btn.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: rgba(2, 132, 199, 0.3);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+}
+
+.drawer-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Toggle Row ──────────────────────────────────────────── */
+.drawer-row-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 12px;
+  background: var(--color-bg);
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+.drawer-row-toggle .row-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.drawer-row-toggle--indent {
+  padding-left: 12px;
+}
+
+.toggle-switch-btn {
+  border: none;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+  color: var(--color-muted); /* Match SYSTEM STATUS label color */
+}
+
+.toggle-switch-btn:hover {
+  transform: scale(1.06);
+}
+
+.toggle-switch-btn.on {
+  background: rgba(2, 132, 199, 0.2); /* Soft Ocean background */
+  border: 1px solid rgba(2, 132, 199, 0.45);
+  color: var(--color-muted); /* Match SYSTEM STATUS label color */
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.1);
+}
+
+.toggle-switch-btn.off {
+  background: rgba(128, 128, 128, 0.25); /* High readability in light theme */
+  color: var(--color-muted);
+}
+
+/* ── In-Drawer Monitor Panel ─────────────────────────────── */
+.drawer-monitor-inline {
+  background: var(--color-bg);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-family: monospace;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+  max-height: 200px;
+  opacity: 1;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.2s ease,
+    padding 0.3s ease;
+}
+
+.drawer-monitor-inline.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.drawer-monitor-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text);
+}
+
+.drawer-monitor-row .monitor-key {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: var(--color-muted);
+}
+
+.drawer-monitor-row .monitor-val {
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.monitor-val.fps {
+  color: var(--color-primary);
+}
+.monitor-val.ok {
+  color: var(--color-success);
+}
+.monitor-val.err {
+  color: var(--color-danger);
+}
+.monitor-val.zone-next {
+  color: var(--color-danger);
+}
+.monitor-val.zone-prev {
+  color: var(--color-primary);
+}
+.monitor-val.zone-page {
+  color: var(--color-muted);
+}
+
+/* ── DATA 섹션 — 마진 유틸리티 ──────────────────────────── */
+.drawer-mb-4 {
+  margin-bottom: 4px;
+}
+.drawer-mb-8 {
+  margin-bottom: 8px;
+}
+.drawer-mb-12 {
+  margin-bottom: 12px;
+}
+
+.drawer-session-id {
+  font-size: 10px;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.drawer-download-btn {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.drawer-hint {
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.drawer-hint--spaced {
+  margin-bottom: 14px;
+}

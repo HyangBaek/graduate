@@ -1,0 +1,241 @@
+/* ============================================================
+   PerformanceOverlay.css
+   "연주 시작" 기능 공용 스타일
+   (PerformanceSetupOverlay, PerformanceCountdownOverlay, PerformanceGridOverlay)
+   ============================================================ */
+
+/* ── 설정 시트 (홈 화면) ── */
+
+.perf-setup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10010;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.perf-setup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.perf-setup-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-surface);
+  border-radius: 18px 18px 0 0;
+  padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.perf-setup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.perf-setup-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.perf-setup-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.perf-setup-close-btn:hover {
+  background: rgba(128, 128, 128, 0.15);
+}
+
+.perf-setup-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.perf-setup-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-muted);
+}
+
+.perf-preset-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.perf-preset-btn {
+  flex: 1;
+  min-width: 56px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.perf-preset-btn:hover {
+  border-color: rgba(2, 132, 199, 0.4);
+}
+
+.perf-preset-btn.active {
+  background: rgba(2, 132, 199, 0.16);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.perf-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.perf-bpm-slider {
+  flex: 1;
+  accent-color: var(--color-primary);
+}
+
+.perf-bpm-input {
+  width: 64px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.perf-setup-start-btn {
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 12px;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* ── 시작 딜레이 카운트다운 (PDF 뷰어) ── */
+
+.perf-countdown-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+}
+
+.perf-countdown-number {
+  font-size: 96px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.perf-countdown-hint {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── 그리드 하이라이트 (PDF 뷰어) ── */
+
+.perf-grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50000;
+  pointer-events: none;
+}
+
+.perf-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  gap: 0;
+}
+
+.perf-grid-cell {
+  position: relative;
+  border: none;
+  background: transparent;
+}
+
+.perf-grid-cell.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle,
+    rgba(255, 210, 90, 0.4) 0%,
+    rgba(255, 196, 0, 0.18) 45%,
+    rgba(255, 196, 0, 0) 75%
+  );
+  box-shadow: 0 0 90px 40px rgba(255, 196, 0, 0.16);
+  filter: blur(14px);
+  opacity: 0;
+  animation: perf-grid-glow-fade 0.5s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes perf-grid-glow-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.perf-grid-stop-btn {
+  position: absolute;
+  top: 64px;
+  right: 12px;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 68, 68, 0.4);
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--color-danger);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
