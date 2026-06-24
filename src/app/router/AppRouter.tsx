@@ -13,7 +13,8 @@
 //    → 캘리브레이션 완료/취소 즉시 overlay 사라지고 home 바로 사용 가능
 
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react'
-import { useAppRouter, type AppPage } from './useAppRouter'
+import { useAppRouter } from './useAppRouter'
+import { DEBUG_ENABLED, isDebugPage } from '@app/config/debugFlag'
 
 // ── 레이아웃 코드 스플리팅 ────────────────────────────────────────────────────
 // 초기 번들에서 제외 → 스플래시/캘리브레이션 완료 후 첫 렌더 시점에 로드
@@ -59,10 +60,7 @@ let _splashShown = false
 
 // 디버그 메뉴 계열 페이지 — 진입 시 스플래시/자동 캘리브레이션을 건너뛴다.
 // 캘리브레이션은 DebugDrawer의 "CALIBRATION" 버튼(리캘리브레이션)을 눌렀을 때만 진행된다.
-const DEBUG_PAGES: readonly AppPage[] = ['debug', 'calibration-analysis', 'cursor-analysis']
-function isDebugPage(page: AppPage): boolean {
-  return DEBUG_PAGES.includes(page)
-}
+// isDebugPage/DEBUG_ENABLED는 @app/config/debugFlag에서 공유 (useAppRouter와 동일 기준 사용).
 
 export function AppRouter() {
   const currentPage = useAppRouter((s) => s.currentPage)
@@ -140,6 +138,11 @@ export function AppRouter() {
 
   // 라우트 콘텐츠
   const routeContent = (() => {
+    // 프로덕션 빌드 안전장치: useAppRouter가 디버그 페이지 진입을 이미 막아주지만,
+    // currentPage가 어떤 경로로든 디버그 값으로 남아있을 경우를 대비해 한 번 더 차단한다.
+    if (!DEBUG_ENABLED && isDebugPage(currentPage)) {
+      return <HomeLayout />
+    }
     switch (currentPage) {
       case 'home':     return <HomeLayout />
       case 'viewer':   return <UserViewerLayout />
@@ -149,7 +152,6 @@ export function AppRouter() {
       case 'cursor-analysis':      return <CursorAnalysisLayout />
       default:         return <HomeLayout />
     }
-    console.log(showCursor)
   })()
 
   // ── showRoute = splashDone ────────────────────────────────────────────────
