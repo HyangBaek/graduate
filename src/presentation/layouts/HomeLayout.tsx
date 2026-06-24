@@ -27,6 +27,7 @@ import { useRecentFilesStore } from '@/presentation/store/recentFilesStore'
 import { useViewerStore } from '@/presentation/store/viewerStore'
 import { usePerformanceStore } from '@/presentation/store/performanceStore'
 import { PerformanceSetupOverlay } from '@/presentation/components/performance/PerformanceSetupOverlay'
+import { AdBanner } from '@/presentation/components/ads/AdBanner'
 import { storeFile, saveFilePersistent, fileExists, loadFile } from '@/shared/utils/pdfFileStore'
 import { setDocCache } from '@/shared/utils/pdfDocSessionCache'
 // pdfThumbnail은 handleFileChange 내부에서 동적 import:
@@ -419,6 +420,9 @@ export function HomeLayout() {
           </svg>
           연주 시작
         </button>
+
+        {/* 연주 시작 버튼 아래 광고 배너 */}
+        <AdBanner />
       </footer>
 
       <PerformanceSetupOverlay onConfirm={handlePerformanceSetupConfirmed} />

@@ -6,6 +6,7 @@
 //   타이머 변경 시 Zustand 구독 컴포넌트가 불필요하게 리렌더되던 문제 해소
 
 import { create } from 'zustand'
+import { DEBUG_ENABLED, isDebugPage } from '@app/config/debugFlag'
 
 /** 앱이 가질 수 있는 페이지(화면) 식별자 목록. */
 export type AppPage =
@@ -66,7 +67,9 @@ const PATH_TO_PAGE: Record<string, AppPage> = Object.fromEntries(
 function getInitialPage(): AppPage {
   if (typeof window === 'undefined') return 'home'
   const path = window.location.pathname.replace(/\/+$/, '')
-  return PATH_TO_PAGE[path] ?? 'home'
+  const page = PATH_TO_PAGE[path] ?? 'home'
+  // 프로덕션 빌드에서는 /debug 계열 주소로 직접 들어와도 home으로 고정한다.
+  return DEBUG_ENABLED || !isDebugPage(page) ? page : 'home'
 }
 
 /**
@@ -79,16 +82,19 @@ export const useAppRouter = create<AppRouterState>((set, get) => ({
   settingsClickCount: 0,
 
   navigate: (page) => {
+    // 프로덕션 빌드에서는 디버그 계열 페이지로의 이동 자체를 막는다 (home으로 대체).
+    const targetPage = !DEBUG_ENABLED && isDebugPage(page) ? 'home' : page
+
     // /debug 계열 경로 동기화: debug/분석 페이지 진입 시 각자의 주소로,
     // 이탈 시 /로 되돌려 새로고침해도 같은 화면이 유지되고 다른 페이지로
     // 가면 주소가 정리된다.
     if (typeof window !== 'undefined') {
-      const targetPath = PAGE_TO_PATH[page] ?? '/'
+      const targetPath = PAGE_TO_PATH[targetPage] ?? '/'
       if (window.location.pathname !== targetPath) {
         window.history.replaceState(null, '', targetPath)
       }
     }
-    set({ currentPage: page })
+    set({ currentPage: targetPage })
   },
 
   goBack: () => {
@@ -97,6 +103,12 @@ export const useAppRouter = create<AppRouterState>((set, get) => ({
   },
 
   onSettingsClick: () => {
+    // 프로덕션 빌드에서는 3연속 클릭 카운트 자체를 사용하지 않고 바로 설정 화면으로 이동.
+    if (!DEBUG_ENABLED) {
+      get().navigate('settings')
+      return
+    }
+
     // 이전 타이머 초기화
     if (_settingsTimer !== null) {
       clearTimeout(_settingsTimer)
