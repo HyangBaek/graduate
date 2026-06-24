@@ -1,0 +1,15 @@
+/* src/presentation/styles/components/AdBanner.css */
+/* AdBanner.tsx 1:1 대응 스타일 */
+
+.ad-banner {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.ad-banner__slot {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+}

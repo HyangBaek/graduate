@@ -1,0 +1,193 @@
+/* FloatingHeader.css */
+
+/* ── Hamburger Toggle Button ─────────────────────────────── */
+.drawer-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--header-border);
+  color: var(--header-text);
+  font-size: 18px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.drawer-toggle-btn:hover {
+  background: var(--header-btn-hover);
+  filter: brightness(0.9);
+  transform: scale(1.05);
+}
+
+.drawer-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* ── Header Shell ─────────────────────────────────────────── */
+.dashboard-header {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 1200px;
+  height: 60px;
+  background: var(--header-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--header-border);
+  border-radius: 16px;
+  box-shadow: var(--header-shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 1000;
+  box-sizing: border-box;
+  color: var(--header-text);
+  font-family: 'Inter', sans-serif;
+  transition:
+    background var(--transition-normal),
+    border var(--transition-normal),
+    color var(--transition-normal);
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--header-border);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+/* ── Left: Logo & Document Title ─────────────────────────── */
+.header-left-side {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-logo-text {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--color-ocean);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+  transition: color var(--transition-normal);
+}
+
+.header-logo-badge {
+  font-size: 14px;
+  color: var(--color-ocean);
+  opacity: 0.75;
+  font-weight: 400;
+  transition: color var(--transition-normal);
+}
+
+.header-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--header-divider-color);
+}
+
+.header-doc-title {
+  font-size: 13px;
+  color: var(--header-doc-color);
+  font-weight: 500;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Center: Page Controls ───────────────────────────────── */
+.header-center-side {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.header-center-side > * {
+  pointer-events: auto;
+}
+
+.header-page-text {
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 80px;
+  text-align: center;
+  user-select: none;
+}
+
+/* ── Right: Zoom Controls & Hamburger ────────────────────── */
+.header-right-side {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-zoom-text {
+  font-size: 12px;
+  font-weight: 600;
+  width: 45px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+.header-zoom-text:hover {
+  background: var(--header-btn-hover);
+  color: var(--color-primary);
+}
+
+.header-zoom-text:active {
+  transform: scale(0.95);
+}
+
+.control-nav-btn {
+  background: none;
+  border: none;
+  color: var(--header-text);
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-nav-btn:hover:not(:disabled) {
+  background: var(--header-btn-hover);
+}
+
+.control-nav-btn:active:not(:disabled) {
+  background: var(--header-btn-hover);
+  filter: brightness(0.9);
+}
+
+.control-nav-btn:disabled {
+  color: var(--color-muted);
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.icon-svg-centered {
+  display: block;
+  margin: auto;
+}

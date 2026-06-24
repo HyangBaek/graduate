@@ -1,0 +1,68 @@
+/* PerformanceGridOverlay.css */
+/* ── 그리드 하이라이트 (PDF 뷰어) ── */
+
+.perf-grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50000;
+  pointer-events: none;
+}
+
+.perf-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  gap: 0;
+  grid-template-rows: var(--perf-grid-rows);
+  grid-template-columns: var(--perf-grid-cols);
+}
+
+.perf-grid-cell {
+  position: relative;
+  border: none;
+  background: transparent;
+}
+
+.perf-grid-cell.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle,
+    rgba(255, 210, 90, 0.4) 0%,
+    rgba(255, 196, 0, 0.18) 45%,
+    rgba(255, 196, 0, 0) 75%
+  );
+  box-shadow: 0 0 90px 40px rgba(255, 196, 0, 0.16);
+  filter: blur(14px);
+  opacity: 0;
+  animation: perf-grid-glow-fade 0.5s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes perf-grid-glow-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.perf-grid-stop-btn {
+  position: absolute;
+  top: 64px;
+  right: 12px;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 68, 68, 0.4);
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--color-danger);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}

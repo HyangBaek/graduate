@@ -1,0 +1,46 @@
+/* DebugPanelCluster.css */
+
+/* ── 클러스터 컨테이너 ───────────────────────────────────── */
+.debug-panel-cluster {
+  position: fixed;
+  top: 90px; /* Aligned with webcam-preview top */
+  right: 0;
+  width: 596px; /* 280px * 2 + padding + gap */
+  max-height: calc(100vh - 110px);
+  display: flex;
+  flex-direction: row; /* Side-by-side columns */
+  gap: 12px;
+  padding: 0 12px 12px 12px;
+  z-index: 10006;
+  pointer-events: none;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  overflow-y: auto;
+  scrollbar-width: none; /* Hide scrollbar */
+}
+
+.debug-panel-cluster::-webkit-scrollbar {
+  display: none;
+}
+
+.debug-panel-cluster.drawer-open {
+  right: 300px;
+}
+
+/* ── 클러스터 내의 열 구성 ───────────────────────────────── */
+.debug-panel-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 280px;
+  pointer-events: none;
+}
+
+.left-col {
+  /* Pushes contents down to clear the webcam-preview (210px height + 12px gap = 222px margin) */
+  margin-top: 222px;
+}
+
+.right-col {
+  margin-top: 0;
+}

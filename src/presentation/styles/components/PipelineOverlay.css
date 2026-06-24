@@ -1,0 +1,100 @@
+/* PipelineOverlay.css */
+/* Shared panel chrome (.debug-overlay-panel, .debug-section, .status-*, etc.)
+   lives in ../debug-panels.css — these rules are exclusive to PipelineOverlay. */
+
+.pipeline-sub-section {
+  padding-left: 12px;
+}
+
+/* ── 10-STEP PIPELINE 그룹 (수집/추론/후처리/출력) ──────────────────── */
+.pipeline-group {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  background: rgba(128, 128, 128, 0.04);
+}
+
+.pipeline-group h4 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin: 0 0 6px 0;
+  color: var(--color-muted);
+}
+
+.pipeline-group.group-ok h4 {
+  color: #00cc66;
+}
+
+.pipeline-group.group-fail {
+  border-color: rgba(255, 68, 68, 0.4);
+  background: rgba(255, 68, 68, 0.06);
+}
+
+.pipeline-group.group-fail h4 {
+  color: #ff4444;
+}
+
+.pipeline-group .debug-section {
+  margin-bottom: 0;
+}
+
+/* ── Head Pose ↔ Gaze 위상차 벡터 (진단용, 읽기 전용) ────────────────── */
+.pipeline-vector-svg {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 4px auto;
+}
+
+.pipeline-vector-ring {
+  fill: none;
+  stroke: rgba(128, 128, 128, 0.2);
+  stroke-width: 1;
+}
+
+.pipeline-vector-axis {
+  stroke: rgba(128, 128, 128, 0.15);
+  stroke-width: 1;
+}
+
+.pipeline-vector-arrow-head {
+  stroke: var(--color-primary);
+  stroke-width: 2.5;
+}
+
+/* gaze는 raw(미필터링) 신호 — 코드베이스 전반의 raw 표기 관례(.gaze-dot.raw 등)와
+   동일하게 붉은 계열로 통일한다. */
+.pipeline-vector-arrow-gaze {
+  stroke: #ff4444;
+  stroke-width: 2.5;
+}
+
+.pipeline-vector-legend {
+  justify-content: center;
+  gap: 10px;
+}
+
+.pipeline-vector-legend .pipeline-vector-legend-head {
+  color: var(--color-primary);
+}
+
+.pipeline-vector-legend .pipeline-vector-legend-gaze {
+  color: #ff4444;
+}
+
+.group-root-cause {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #fff;
+  background: #ff4444;
+  border-radius: 6px;
+  padding: 1px 6px;
+  text-transform: none;
+}

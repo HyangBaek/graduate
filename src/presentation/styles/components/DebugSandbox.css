@@ -1,0 +1,24 @@
+/* DebugSandbox.css */
+/* Shared panel chrome (.debug-overlay-panel, .debug-sandbox-panel,
+   .panel-hidden, scrollbar, etc.) lives in ../debug-panels.css —
+   these rules are exclusive to DebugSandbox. */
+
+.debug-sandbox-panel h2 {
+  color: var(--color-primary); /* Header text inherits theme cyan/blue */
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+
+.debug-sandbox-desc {
+  margin: 6px 0;
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.debug-sandbox-tip {
+  font-size: 10px;
+  color: var(--color-muted);
+  margin: 3px 0;
+  opacity: 0.7;
+}

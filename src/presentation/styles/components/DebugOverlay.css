@@ -1,0 +1,66 @@
+/* DebugOverlay.css */
+/* Shared panel chrome (.debug-overlay-panel, .debug-section, .status-*, etc.)
+   lives in ../debug-panels.css — these rules are exclusive to DebugOverlay. */
+
+.debug-bounds-info {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.debug-keyboard-tip {
+  font-size: 10px;
+  color: var(--color-muted);
+  margin: 12px 0 0 0;
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* ── 시선 점 (Raw / Filtered) ────────────────────────────── */
+.gaze-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  transform: translate3d(var(--gaze-x, 0), var(--gaze-y, 0), 0);
+  will-change: transform;
+}
+
+.gaze-dot.raw {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 0, 0, 0.7);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+  margin-top: -6px;
+  margin-left: -6px;
+  z-index: 10001;
+}
+
+.gaze-dot.filtered {
+  width: 16px;
+  height: 16px;
+  background: rgba(0, 255, 120, 0.8);
+  box-shadow: 0 0 12px rgba(0, 255, 120, 0.9);
+  margin-top: -8px;
+  margin-left: -8px;
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dwell-indicator {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #00ffaa;
+  border-radius: 50%;
+  box-sizing: border-box;
+  transform: scale(var(--dwell-scale, 1));
+  opacity: var(--dwell-opacity, 0);
+  will-change: transform, opacity;
+  transition:
+    transform 0.1s linear,
+    opacity 0.1s linear;
+}

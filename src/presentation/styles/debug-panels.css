@@ -1,0 +1,117 @@
+/* ============================================================
+   debug-panels.css
+   DebugOverlay / PipelineOverlay / DebugSandbox가 공유하는
+   패널 공통 프레임(배경, 스크롤, 가시성 토글, 상태 색상 등).
+   각 패널의 고유 마크업/스타일은 styles/components/Debug*.css 참고.
+   ============================================================ */
+
+/* ── 패널 공통 (가시성 토글) ─────────────────────────────── */
+.debug-overlay-panel,
+.debug-sandbox-panel {
+  width: 100%;
+  background: var(--color-surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 16px;
+  padding: 16px 20px 28px 20px; /* Increased bottom padding for spacing */
+  color: var(
+    --color-muted
+  ); /* Main text color unified to match SYSTEM STATUS */
+  pointer-events: auto;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  /* 항목이 많아 낮은 뷰포트에서 max-height에 가려 아래 내용이 안 보였음.
+     바깥 .debug-panel-cluster는 pointer-events: none이라 거기서는 스크롤이
+     먹지 않으므로, pointer-events: auto인 이 패널 자체가 스크롤을 받게 한다. */
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: min(900px, calc(100vh - 130px));
+  scrollbar-width: thin;
+  opacity: 1;
+  transition:
+    max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease,
+    padding 0.3s ease,
+    margin 0.35s ease;
+  margin-top: 0;
+}
+
+.debug-overlay-panel::-webkit-scrollbar,
+.debug-sandbox-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.debug-overlay-panel::-webkit-scrollbar-thumb,
+.debug-sandbox-panel::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.35);
+  border-radius: 3px;
+}
+
+.debug-overlay-panel.panel-hidden,
+.debug-sandbox-panel.panel-hidden {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: -12px;
+  pointer-events: none;
+}
+
+/* ── 오버레이 패널 내부 ──────────────────────────────────── */
+.debug-overlay-panel h3 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--color-primary); /* Uses theme primary (Ocean/Aqua) */
+}
+
+.debug-overlay-panel hr {
+  border: none;
+  height: 1px;
+  background: rgba(128, 128, 128, 0.15);
+  margin: 8px 0 12px 0;
+}
+
+.debug-section {
+  margin-bottom: 12px;
+}
+
+.debug-section h4 {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-muted); /* Unified header text */
+  margin: 0 0 4px 0;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.debug-overlay-panel p {
+  margin: 4px 0;
+  font-size: 11px;
+  color: var(--color-muted); /* Unified paragraph text */
+  display: flex;
+  justify-content: space-between;
+}
+
+.debug-overlay-panel p span {
+  color: var(--color-muted); /* Default values match parent */
+}
+
+.debug-overlay-panel .highlight {
+  color: var(--color-muted);
+  font-weight: normal;
+}
+.debug-overlay-panel .status-ok {
+  color: #00cc66;
+  font-weight: bold;
+}
+.debug-overlay-panel .status-warn {
+  color: #ffaa00;
+  font-weight: bold;
+}
+.debug-overlay-panel .status-error {
+  color: #ff4444;
+  font-weight: bold;
+}

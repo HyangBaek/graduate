@@ -1,0 +1,33 @@
+/* GazeRuntime.css */
+
+.webcam-preview {
+  position: fixed;
+  right: 304px; /* Aligned with left-col when drawer is closed (12px padding + 280px right-col + 12px gap) */
+  top: 90px;
+  width: 280px; /* Matching column width */
+  height: 210px; /* 4:3 aspect ratio */
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  background: #000;
+  z-index: 10006;
+  pointer-events: none;
+  transition:
+    right 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
+  opacity: 1;
+}
+
+body[data-drawer='open'] .webcam-preview {
+  right: 604px; /* shifted by 300px drawer width */
+}
+
+/* 현재 어떤 컴포넌트에서도 적용되지 않음 — task #150/151에서 정리 예정 */
+.webcam-preview--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.webcam-preview--off {
+  display: none;
+}
